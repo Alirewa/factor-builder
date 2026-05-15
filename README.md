@@ -1,10 +1,10 @@
 <div dir="rtl">
 
-# فاکتورساز اختصاصی اپلای فا
+# فاکتورساز اختصاصی
 
 ابزار آنلاین ساخت فاکتور حرفه‌ای فارسی — رایگان، بدون نیاز به ثبت‌نام، با پشتیبانی کامل از زبان فارسی و چیدمان راست‌به‌چپ.
 
-[🔗 دمو زنده](https://factor.applyfa.com) &nbsp;|&nbsp; [📖 English Docs](#english)
+[📖 English Docs](#english)
 
 ---
 
@@ -69,8 +69,8 @@ npm run build
 
 **ساخت Subdomain در cPanel:**
 1. وارد **Domains** یا **Subdomains** شوید
-2. subdomain بسازید: `factor.applyfa.com`
-3. Document Root را روی `public_html/factor` تنظیم کنید
+2. subdomain موردنظر را بسازید
+3. Document Root را روی مسیر دلخواه تنظیم کنید
 4. فایل‌های `out/` را آپلود کنید
 
 > فایل `.htaccess` داخل `out/` قرار دارد — حتماً آپلود شود (نمایش فایل‌های hidden را در File Manager فعال کنید).
@@ -81,7 +81,7 @@ npm run build
 یا تنظیمات زیر را در Netlify وارد کنید:
 
 ```
-Build command:    npm run build
+Build command:     npm run build
 Publish directory: out
 ```
 
@@ -123,12 +123,12 @@ src/
 
 <div dir="ltr">
 
-# Factor Builder — Persian Invoice Generator
+# Persian Invoice Builder
 
 A free, no-signup online invoice builder with full Persian (Farsi) RTL support.  
 Generate professional invoices, download as PDF, or print — entirely in the browser.
 
-[🔗 Live Demo](https://factor.applyfa.com) &nbsp;|&nbsp; [📖 راهنمای فارسی](#top)
+[📖 راهنمای فارسی](#top)
 
 ---
 
@@ -193,8 +193,8 @@ Upload the **contents** of `out/` (not the folder itself) to your `public_html` 
 
 **Subdomain setup in cPanel:**
 1. Go to **Domains** → **Subdomains**
-2. Create: `factor.yourdomain.com`
-3. Set Document Root to `public_html/factor`
+2. Create your desired subdomain
+3. Set Document Root to your desired path
 4. Upload contents of `out/` there
 
 > The `.htaccess` file inside `out/` must be uploaded — enable "Show Hidden Files" in File Manager.

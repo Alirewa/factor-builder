@@ -39,7 +39,6 @@ export function Navbar({ onExportPDF, onPrint, isExporting }: NavbarProps) {
             </div>
             <div className="leading-none">
               <p className="text-sm font-bold text-gray-900 dark:text-white leading-tight">فاکتورساز اختصاصی</p>
-              <p className="text-[10px] text-gray-400 dark:text-slate-500 leading-tight">اپلای فا</p>
             </div>
           </motion.div>
 
@@ -150,7 +149,6 @@ export function Navbar({ onExportPDF, onPrint, isExporting }: NavbarProps) {
                   </div>
                   <div>
                     <p className="text-sm font-bold text-gray-900 dark:text-white leading-tight">فاکتورساز اختصاصی</p>
-                    <p className="text-[10px] text-gray-400 dark:text-slate-500">اپلای فا</p>
                   </div>
                 </div>
                 <button onClick={closeDrawer} className="btn-ghost p-1.5" aria-label="بستن منو">

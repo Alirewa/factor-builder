@@ -19,10 +19,10 @@ export function MinimalTemplate({ invoice, totals }: Props) {
     >
       {/* Header — 3-col layout */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'flex-start', marginBottom: '24px' }}>
-        {/* Right: logo + brand name only */}
-        <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '3px' }}>
+        {/* Right: logo + brand name side by side */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
           {customization.logoImage && (
-            <img src={customization.logoImage} alt="logo" style={{ height: '40px', objectFit: 'contain', marginBottom: '3px' }} />
+            <img src={customization.logoImage} alt="logo" style={{ height: '40px', maxWidth: '110px', objectFit: 'contain', flexShrink: 0 }} />
           )}
           <div style={{ fontSize: customization.logoImage ? '16px' : '22px', fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>
             {seller.company || seller.name || 'نام برند'}
@@ -86,7 +86,10 @@ export function MinimalTemplate({ invoice, totals }: Props) {
             <div style={{ fontSize: '13px', fontWeight: 700 }}>
               {party.company || party.name || <span style={{ color: '#cbd5e1' }}>—</span>}
             </div>
-            {party.phone && <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{party.phone}</div>}
+            {party.company && party.name && <div style={{ fontSize: '11px', color: '#64748b' }}>{party.name}</div>}
+            {party.nationalId && <div style={{ fontSize: '11px', color: '#64748b' }}>کد ملی / شناسه: {party.nationalId}</div>}
+            {party.phone && <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>تلفن: {party.phone}</div>}
+            {party.email && <div style={{ fontSize: '11px', color: '#64748b', direction: 'ltr', textAlign: 'right' }}>{party.email}</div>}
             {party.address && <div style={{ fontSize: '11px', color: '#64748b' }}>{party.address}</div>}
           </div>
         ))}

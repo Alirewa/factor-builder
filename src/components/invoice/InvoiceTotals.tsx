@@ -21,7 +21,7 @@ export function InvoiceTotals() {
               min="0"
               max="100"
               value={invoice.taxRate}
-              onChange={(e) => updateInvoice({ taxRate: parseFloat(e.target.value) || 0 })}
+              onChange={(e) => updateInvoice({ taxRate: Math.min(100, Math.max(0, parseFloat(e.target.value) || 0)) })}
               dir="ltr"
             />
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400">%</span>
@@ -36,7 +36,7 @@ export function InvoiceTotals() {
               min="0"
               max="100"
               value={invoice.globalDiscount}
-              onChange={(e) => updateInvoice({ globalDiscount: parseFloat(e.target.value) || 0 })}
+              onChange={(e) => updateInvoice({ globalDiscount: Math.min(100, Math.max(0, parseFloat(e.target.value) || 0)) })}
               dir="ltr"
             />
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400">%</span>

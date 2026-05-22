@@ -35,8 +35,10 @@ export function CorporateTemplate({ invoice, totals }: Props) {
               <div style={{ fontSize: '13px', fontWeight: 700 }}>
                 {party.company || party.name || <span style={{ color: '#cbd5e1' }}>—</span>}
               </div>
-              {party.nationalId && <div style={{ fontSize: '11px', color: '#64748b' }}>کد: {party.nationalId}</div>}
-              {party.phone && <div style={{ fontSize: '11px', color: '#64748b' }}>{party.phone}</div>}
+              {party.company && party.name && <div style={{ fontSize: '11px', color: '#64748b' }}>{party.name}</div>}
+              {party.nationalId && <div style={{ fontSize: '11px', color: '#64748b' }}>کد ملی / شناسه: {party.nationalId}</div>}
+              {party.phone && <div style={{ fontSize: '11px', color: '#64748b' }}>تلفن: {party.phone}</div>}
+              {party.email && <div style={{ fontSize: '11px', color: '#64748b', direction: 'ltr', textAlign: 'right' }}>{party.email}</div>}
               {party.address && <div style={{ fontSize: '11px', color: '#64748b' }}>{party.address}</div>}
             </div>
           ))}

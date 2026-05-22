@@ -32,13 +32,13 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
         borderBottom: dark ? 'none' : `3px solid ${primary}`,
       }}
     >
-      {/* ── Right: Logo + brand name only ── */}
-      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+      {/* ── Right: Logo + brand name side by side ── */}
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
         {customization.logoImage && (
           <img
             src={customization.logoImage}
             alt="logo"
-            style={{ height: '48px', maxWidth: '150px', objectFit: 'contain', marginBottom: '4px' }}
+            style={{ height: '44px', maxWidth: '120px', objectFit: 'contain', flexShrink: 0 }}
           />
         )}
         <div
@@ -114,8 +114,9 @@ export function PartyBox({ party, label, primary }: { party: InvoiceData['seller
           <>
             <div style={{ fontWeight: 700, fontSize: '13px' }}>{party.company || party.name}</div>
             {party.company && party.name && <div style={{ color: '#64748b' }}>{party.name}</div>}
-            {party.nationalId && <div style={{ color: '#64748b' }}>کد: {party.nationalId}</div>}
+            {party.nationalId && <div style={{ color: '#64748b' }}>کد ملی / شناسه: {party.nationalId}</div>}
             {party.phone && <div style={{ color: '#64748b' }}>تلفن: {party.phone}</div>}
+            {party.email && <div style={{ color: '#64748b', direction: 'ltr', textAlign: 'right' }}>{party.email}</div>}
             {party.address && <div style={{ color: '#64748b' }}>{party.address}</div>}
           </>
         ) : (

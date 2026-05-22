@@ -235,28 +235,60 @@ input, textarea, select, button {
   box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important;
   border: 1px solid #e5e7eb !important;
   z-index: 9999 !important;
-}
-.dark .rmdp-wrapper {
-  background: #1e293b !important;
-  border-color: #334155 !important;
+  background: #ffffff !important;
 }
 .rmdp-header-values, .rmdp-day, .rmdp-week-day {
   font-family: 'Vazirmatn', sans-serif !important;
 }
+.rmdp-header-values { color: #1e293b !important; }
+.rmdp-week-day { color: #64748b !important; }
+.rmdp-day span { color: #1e293b !important; }
+.rmdp-day.rmdp-disabled span { color: #cbd5e1 !important; }
 .rmdp-day.rmdp-selected span:not(.highlight) {
   background: #2563eb !important;
+  color: #ffffff !important;
 }
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
   background: #dbeafe !important;
   color: #1d4ed8 !important;
 }
-.dark .rmdp-day:not(.rmdp-disabled) span:hover {
-  background: #1e3a8a !important;
-  color: #93c5fd !important;
-}
 .rmdp-arrow { border-color: #2563eb !important; }
 .rmdp-arrow-container:hover { background: #dbeafe !important; }
 .rmdp-ep-arrow { display: none !important; }
+
+/* ── Dark mode ── */
+.dark .rmdp-wrapper {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+}
+.dark .rmdp-header-values { color: #e2e8f0 !important; }
+.dark .rmdp-week-day { color: #64748b !important; }
+.dark .rmdp-day span { color: #cbd5e1 !important; }
+.dark .rmdp-day.rmdp-today span { color: #93c5fd !important; }
+.dark .rmdp-day.rmdp-disabled span { color: #334155 !important; }
+.dark .rmdp-day.rmdp-selected span:not(.highlight) {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+.dark .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background: #1e3a8a !important;
+  color: #93c5fd !important;
+}
+.dark .rmdp-arrow { border-color: #60a5fa !important; }
+.dark .rmdp-arrow-container:hover { background: #1e3a8a !important; }
+.dark .rmdp-header { background: #1e293b !important; }
+.dark .rmdp-calendar { background: #1e293b !important; }
+.dark .rmdp-day-picker { background: #1e293b !important; }
+.dark .rmdp-month-picker,
+.dark .rmdp-year-picker {
+  background: #1e293b !important;
+}
+.dark .rmdp-month-picker .rmdp-day span,
+.dark .rmdp-year-picker .rmdp-day span {
+  color: #cbd5e1 !important;
+}
+
 .rmdp-input {
   all: unset;
 }

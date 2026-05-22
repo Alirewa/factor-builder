@@ -3,7 +3,6 @@ export interface InvoiceItem {
   name: string;
   quantity: number;
   unitPrice: number;
-  discount: number;
   total: number;
 }
 
@@ -62,7 +61,6 @@ export interface InvoiceData {
 
 export interface InvoiceTotals {
   subtotal: number;
-  itemDiscounts: number;
   globalDiscountAmount: number;
   taxAmount: number;
   total: number;

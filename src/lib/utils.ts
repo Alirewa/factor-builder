@@ -11,9 +11,7 @@ export function formatCurrency(amount: number): string {
 }
 
 export function calculateItemTotal(item: Omit<InvoiceItem, 'id' | 'total'>): number {
-  const base = item.quantity * item.unitPrice;
-  const discountAmount = (base * item.discount) / 100;
-  return base - discountAmount;
+  return item.quantity * item.unitPrice;
 }
 
 export function calculateTotals(
@@ -22,18 +20,13 @@ export function calculateTotals(
   globalDiscount: number
 ): InvoiceTotals {
   const subtotal = items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
-  const itemDiscounts = items.reduce((sum, item) => {
-    return sum + (item.quantity * item.unitPrice * item.discount) / 100;
-  }, 0);
-  const afterItemDiscounts = subtotal - itemDiscounts;
-  const globalDiscountAmount = (afterItemDiscounts * globalDiscount) / 100;
-  const afterAllDiscounts = afterItemDiscounts - globalDiscountAmount;
-  const taxAmount = (afterAllDiscounts * taxRate) / 100;
-  const total = afterAllDiscounts + taxAmount;
+  const globalDiscountAmount = (subtotal * globalDiscount) / 100;
+  const afterDiscount = subtotal - globalDiscountAmount;
+  const taxAmount = (afterDiscount * taxRate) / 100;
+  const total = afterDiscount + taxAmount;
 
   return {
     subtotal,
-    itemDiscounts,
     globalDiscountAmount,
     taxAmount,
     total,

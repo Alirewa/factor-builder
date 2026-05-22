@@ -111,9 +111,6 @@ export function MinimalTemplate({ invoice, totals }: Props) {
       {/* Totals */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <div style={{ width: '260px', fontSize: '12px' }}>
-          {totals.itemDiscounts > 0 && (
-            <MRow label="تخفیف اقلام" value={`−${formatCurrency(totals.itemDiscounts)}`} />
-          )}
           {totals.globalDiscountAmount > 0 && (
             <MRow label={`تخفیف (${invoice.globalDiscount}%)`} value={`−${formatCurrency(totals.globalDiscountAmount)}`} />
           )}

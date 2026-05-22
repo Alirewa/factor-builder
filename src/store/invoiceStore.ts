@@ -111,7 +111,7 @@ export const useInvoiceStore = create<InvoiceStore>()(
 
       addItem: () =>
         set((s) => {
-          const item: InvoiceItem = { id: crypto.randomUUID(), name: '', quantity: 1, unitPrice: 0, discount: 0, total: 0 };
+          const item: InvoiceItem = { id: crypto.randomUUID(), name: '', quantity: 1, unitPrice: 0, total: 0 };
           const u = { ...s.invoice, items: [...s.invoice.items, item] };
           return { invoice: u, totals: recalc(u) };
         }),

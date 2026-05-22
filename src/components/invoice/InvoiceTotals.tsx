@@ -48,9 +48,6 @@ export function InvoiceTotals() {
       <div className="bg-gray-50 dark:bg-slate-700/25 rounded-xl p-4 space-y-2.5">
         <TotalRow label="جمع اقلام" value={totals.subtotal} />
 
-        {totals.itemDiscounts > 0 && (
-          <TotalRow label="تخفیف اقلام" value={totals.itemDiscounts} type="discount" />
-        )}
         {totals.globalDiscountAmount > 0 && (
           <TotalRow
             label={`تخفیف کلی (${invoice.globalDiscount}%)`}

@@ -18,7 +18,7 @@ function ItemRow({ item, index }: { item: InvoiceItem; index: number }) {
       transition={{ duration: 0.18 }}
       className="border-b border-gray-50 dark:border-slate-700/40 last:border-0 py-2.5"
     >
-      {/* Row: number + name */}
+      {/* Row: number + name + delete */}
       <div className="flex items-start gap-2 mb-2">
         <span className="w-5 flex-shrink-0 text-center text-[11px] text-gray-400 dark:text-slate-500 font-medium mt-2.5">
           {index + 1}
@@ -40,8 +40,9 @@ function ItemRow({ item, index }: { item: InvoiceItem; index: number }) {
         </button>
       </div>
 
-      {/* Row: qty + price + discount + total */}
-      <div className="grid grid-cols-4 gap-2 pr-7">
+      {/* Row: qty + price + total — 3 cols, comfortable on all screen sizes */}
+      <div className="grid grid-cols-3 gap-2 pr-7">
+        {/* Quantity */}
         <div>
           <label className="label">تعداد</label>
           <input
@@ -55,8 +56,13 @@ function ItemRow({ item, index }: { item: InvoiceItem; index: number }) {
             dir="ltr"
           />
         </div>
+
+        {/* Unit price */}
         <div>
-          <label className="label">قیمت (ریال)</label>
+          <label className="label">
+            <span className="hidden sm:inline">قیمت واحد (ریال)</span>
+            <span className="sm:hidden">قیمت (ریال)</span>
+          </label>
           <input
             className="input text-xs py-2"
             type="number"
@@ -67,22 +73,8 @@ function ItemRow({ item, index }: { item: InvoiceItem; index: number }) {
             dir="ltr"
           />
         </div>
-        <div>
-          <label className="label">تخفیف %</label>
-          <div className="relative">
-            <input
-              className="input text-xs py-2 pl-5"
-              type="number"
-              min="0"
-              max="100"
-              value={item.discount || ''}
-              onChange={(e) => updateItem(item.id, { discount: parseFloat(e.target.value) || 0 })}
-              placeholder="0"
-              dir="ltr"
-            />
-            <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">%</span>
-          </div>
-        </div>
+
+        {/* Row total */}
         <div>
           <label className="label">جمع</label>
           <div className="h-[38px] flex items-center justify-end px-2 rounded-lg bg-gray-50 dark:bg-slate-700/30 border border-gray-100 dark:border-slate-700">

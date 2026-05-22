@@ -147,14 +147,13 @@ export function ItemsTable({
   primary: string;
   alternateRow?: string;
 }) {
-  const { items, customization } = invoice;
-  const showDiscount = customization.showDiscount;
+  const { items } = invoice;
 
   return (
     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
       <thead>
         <tr style={{ background: primary }}>
-          {['#', 'شرح کالا / خدمات', 'تعداد', 'قیمت واحد (ریال)', ...(showDiscount ? ['تخفیف'] : []), 'مبلغ کل (ریال)'].map(
+          {['#', 'شرح کالا / خدمات', 'تعداد', 'قیمت واحد (ریال)', 'مبلغ کل (ریال)'].map(
             (h, i, arr) => (
               <th
                 key={h}
@@ -164,7 +163,7 @@ export function ItemsTable({
                   fontSize: '11px',
                   fontWeight: 700,
                   fontFamily: 'Vazirmatn, sans-serif',
-                  textAlign: i === 0 ? 'center' : i === arr.length - 1 || i === 3 ? 'left' : i === 2 || i === 4 ? 'center' : 'right',
+                  textAlign: i === 0 ? 'center' : i === arr.length - 1 || i === 3 ? 'left' : i === 2 ? 'center' : 'right',
                   borderRadius: i === 0 ? '0 6px 6px 0' : i === arr.length - 1 ? '6px 0 0 6px' : undefined,
                 }}
               >
@@ -178,7 +177,7 @@ export function ItemsTable({
         {items.length === 0 ? (
           <tr>
             <td
-              colSpan={showDiscount ? 6 : 5}
+              colSpan={5}
               style={{ padding: '20px', textAlign: 'center', color: '#94a3b8', fontSize: '12px' }}
             >
               هیچ کالایی ثبت نشده است
@@ -191,9 +190,6 @@ export function ItemsTable({
               <td style={{ ...tdS, textAlign: 'right' }}>{item.name}</td>
               <td style={{ ...tdS, textAlign: 'center' }}>{item.quantity}</td>
               <td style={{ ...tdS, textAlign: 'left', direction: 'ltr' }}>{formatCurrency(item.unitPrice)}</td>
-              {showDiscount && (
-                <td style={{ ...tdS, textAlign: 'center' }}>{item.discount > 0 ? `${item.discount}%` : '—'}</td>
-              )}
               <td style={{ ...tdS, textAlign: 'left', direction: 'ltr', fontWeight: 700 }}>
                 {formatCurrency(item.total)}
               </td>
@@ -218,9 +214,6 @@ export function TotalsSummary({
   return (
     <div style={{ fontSize: '12px' }}>
       <TRow label="جمع اقلام" value={`${formatCurrency(totals.subtotal)} ریال`} />
-      {totals.itemDiscounts > 0 && (
-        <TRow label="تخفیف اقلام" value={`−${formatCurrency(totals.itemDiscounts)} ریال`} color="#16a34a" />
-      )}
       {totals.globalDiscountAmount > 0 && (
         <TRow
           label={`تخفیف کلی (${invoice.globalDiscount}%)`}

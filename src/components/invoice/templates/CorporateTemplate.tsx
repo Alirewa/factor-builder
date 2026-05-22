@@ -65,7 +65,6 @@ export function CorporateTemplate({ invoice, totals }: Props) {
             </div>
             <div style={{ padding: '12px 14px', fontSize: '12px' }}>
               <CRow label="جمع اقلام" value={`${formatCurrency(totals.subtotal)} ریال`} />
-              {totals.itemDiscounts > 0 && <CRow label="تخفیف اقلام" value={`−${formatCurrency(totals.itemDiscounts)}`} green />}
               {totals.globalDiscountAmount > 0 && <CRow label="تخفیف کلی" value={`−${formatCurrency(totals.globalDiscountAmount)}`} green />}
               {customization.showTax && totals.taxAmount > 0 && (
                 <CRow label={`مالیات (${invoice.taxRate}%)`} value={`+${formatCurrency(totals.taxAmount)}`} orange />

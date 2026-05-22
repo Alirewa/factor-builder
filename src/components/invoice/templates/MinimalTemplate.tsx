@@ -47,21 +47,21 @@ export function MinimalTemplate({ invoice, totals }: Props) {
           </div>
         </div>
 
-        {/* Left: number + date */}
-        <div style={{ textAlign: 'left', direction: 'ltr' }}>
+        {/* Left col: number + date — RTL so label comes first */}
+        <div style={{ textAlign: 'right', direction: 'rtl' }}>
           <table style={{ fontSize: '12px' }}>
             <tbody>
               <tr>
-                <td style={{ color: '#94a3b8', paddingBottom: '3px', paddingRight: '8px' }}>شماره:</td>
-                <td style={{ fontWeight: 700, paddingBottom: '3px' }}>{invoice.invoiceNumber}</td>
+                <td style={{ color: '#94a3b8', paddingBottom: '3px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>شماره:</td>
+                <td style={{ fontWeight: 700, paddingBottom: '3px', direction: 'ltr' }}>{invoice.invoiceNumber}</td>
               </tr>
               <tr>
-                <td style={{ color: '#94a3b8', paddingRight: '8px' }}>تاریخ:</td>
+                <td style={{ color: '#94a3b8', paddingLeft: '8px', whiteSpace: 'nowrap' }}>تاریخ:</td>
                 <td style={{ fontWeight: 600 }}>{toJalali(invoice.invoiceDate)}</td>
               </tr>
               {invoice.dueDate && (
                 <tr>
-                  <td style={{ color: '#94a3b8', paddingRight: '8px' }}>سررسید:</td>
+                  <td style={{ color: '#94a3b8', paddingLeft: '8px', whiteSpace: 'nowrap' }}>سررسید:</td>
                   <td style={{ fontWeight: 600 }}>{toJalali(invoice.dueDate)}</td>
                 </tr>
               )}

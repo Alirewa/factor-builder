@@ -12,6 +12,7 @@ import { InvoicePreview } from '@/components/invoice/InvoicePreview';
 import { CustomizationPanel } from '@/components/invoice/CustomizationPanel';
 import { InvoiceListPanel } from '@/components/invoice/InvoiceListPanel';
 import { ResetModal } from '@/components/ui/ResetModal';
+import { LicenseGate } from '@/components/LicenseGate';
 import { useInvoiceStore } from '@/store/invoiceStore';
 import { exportInvoiceToPDF, printInvoice } from '@/lib/pdfExport';
 import toast from 'react-hot-toast';
@@ -42,6 +43,7 @@ export default function Home() {
   const handlePrint = useCallback(() => printInvoice(), []);
 
   return (
+    <LicenseGate>
     <div className="flex flex-col overflow-hidden bg-gray-50 dark:bg-slate-950" style={{ height: '100dvh' }}>
       {/* ── Navbar ── */}
       <Navbar
@@ -123,5 +125,6 @@ export default function Home() {
       <CustomizationPanel />
       <ResetModal />
     </div>
+    </LicenseGate>
   );
 }

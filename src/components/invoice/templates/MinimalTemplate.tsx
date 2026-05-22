@@ -47,21 +47,21 @@ export function MinimalTemplate({ invoice, totals }: Props) {
           </div>
         </div>
 
-        {/* Left col: number + date — table RTL so label comes first, div left-aligned */}
-        <div style={{ textAlign: 'left' }}>
-          <table style={{ fontSize: '12px', direction: 'rtl' }}>
+        {/* Left col: number + date — stuck to left corner, label left, value right of label */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <table style={{ fontSize: '12px', borderCollapse: 'collapse', direction: 'ltr' }}>
             <tbody>
               <tr>
-                <td style={{ color: '#94a3b8', paddingBottom: '3px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>شماره:</td>
-                <td style={{ fontWeight: 700, paddingBottom: '3px', direction: 'ltr' }}>{invoice.invoiceNumber}</td>
+                <td style={{ color: '#94a3b8', paddingBottom: '3px', paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>شماره:</td>
+                <td style={{ fontWeight: 700, paddingBottom: '3px' }}>{invoice.invoiceNumber}</td>
               </tr>
               <tr>
-                <td style={{ color: '#94a3b8', paddingLeft: '8px', whiteSpace: 'nowrap' }}>تاریخ:</td>
+                <td style={{ color: '#94a3b8', paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>تاریخ:</td>
                 <td style={{ fontWeight: 600 }}>{toJalali(invoice.invoiceDate)}</td>
               </tr>
               {invoice.dueDate && (
                 <tr>
-                  <td style={{ color: '#94a3b8', paddingLeft: '8px', whiteSpace: 'nowrap' }}>سررسید:</td>
+                  <td style={{ color: '#94a3b8', paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>سررسید:</td>
                   <td style={{ fontWeight: 600 }}>{toJalali(invoice.dueDate)}</td>
                 </tr>
               )}

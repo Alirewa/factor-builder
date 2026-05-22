@@ -72,25 +72,25 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
         </div>
       </div>
 
-      {/* ── Left col: Invoice number + dates — table RTL so label comes first, div left-aligned ── */}
-      <div style={{ textAlign: 'left' }}>
-        <table style={{ fontSize: '12px', borderCollapse: 'collapse', direction: 'rtl' }}>
+      {/* ── Left col: number + dates — stuck to left corner, label aligned left, value right of label ── */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <table style={{ fontSize: '12px', borderCollapse: 'collapse', direction: 'ltr' }}>
           <tbody>
             <tr>
-              <td style={{ color: mutedColor, paddingBottom: '4px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>شماره:</td>
-              <td style={{ fontWeight: 700, color: textColor, paddingBottom: '4px', direction: 'ltr' }}>
+              <td style={{ color: mutedColor, paddingBottom: '4px', paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>شماره:</td>
+              <td style={{ fontWeight: 700, color: textColor, paddingBottom: '4px' }}>
                 {invoice.invoiceNumber}
               </td>
             </tr>
             <tr>
-              <td style={{ color: mutedColor, paddingBottom: '2px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>تاریخ صدور:</td>
+              <td style={{ color: mutedColor, paddingBottom: '2px', paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>تاریخ صدور:</td>
               <td style={{ fontWeight: 600, color: textColor, paddingBottom: '2px' }}>
                 {toJalali(invoice.invoiceDate)}
               </td>
             </tr>
             {invoice.dueDate && (
               <tr>
-                <td style={{ color: mutedColor, paddingLeft: '8px', whiteSpace: 'nowrap' }}>سررسید:</td>
+                <td style={{ color: mutedColor, paddingRight: '10px', whiteSpace: 'nowrap', textAlign: 'right' }}>سررسید:</td>
                 <td style={{ fontWeight: 600, color: textColor }}>{toJalali(invoice.dueDate)}</td>
               </tr>
             )}

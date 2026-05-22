@@ -1,7 +1,7 @@
 'use client';
 
 import { InvoiceData, InvoiceTotals } from '@/types/invoice';
-import { InvoiceHeaderBlock, PartyBox, ItemsTable, TotalsSummary, SignatureRow } from './shared';
+import { InvoiceHeaderBlock, ItemsTable, TotalsSummary, SignatureRow, InvoiceFooter } from './shared';
 import { formatCurrency } from '@/lib/utils';
 
 interface Props { invoice: InvoiceData; totals: InvoiceTotals; }
@@ -9,12 +9,12 @@ interface Props { invoice: InvoiceData; totals: InvoiceTotals; }
 export function CorporateTemplate({ invoice, totals }: Props) {
   const { customization } = invoice;
   const primary = customization.primaryColor;
-  const fs = customization.fontSize === 'sm' ? '11px' : customization.fontSize === 'lg' ? '15px' : '13px';
+  const zoom = customization.fontSize === 'sm' ? 0.88 : customization.fontSize === 'lg' ? 1.12 : 1;
 
   return (
     <div
       id="invoice-print-root"
-      style={{ fontFamily: 'Vazirmatn, sans-serif', fontSize: fs, direction: 'rtl', background: '#fff', color: '#0f172a' }}
+      style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', zoom }}
     >
       {/* Dark-background header variant */}
       <div style={{ background: '#0f172a' }}>
@@ -47,7 +47,7 @@ export function CorporateTemplate({ invoice, totals }: Props) {
           <ItemsTable invoice={invoice} primary={primary} alternateRow="#f8fafc" />
         </div>
 
-        {/* Footer */}
+        {/* Footer grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '20px', alignItems: 'start' }}>
           <div>
             {customization.showNotes && invoice.notes && (
@@ -82,6 +82,8 @@ export function CorporateTemplate({ invoice, totals }: Props) {
 
         <SignatureRow invoice={invoice} />
       </div>
+
+      <InvoiceFooter invoice={invoice} primary={primary} />
     </div>
   );
 }

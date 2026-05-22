@@ -2,22 +2,22 @@
 
 import { InvoiceData, InvoiceTotals, INVOICE_TYPE_LABELS } from '@/types/invoice';
 import { formatCurrency, toJalali } from '@/lib/utils';
-import { ItemsTable, SignatureRow } from './shared';
+import { ItemsTable, SignatureRow, InvoiceFooter } from './shared';
 
 interface Props { invoice: InvoiceData; totals: InvoiceTotals; }
 
 export function MinimalTemplate({ invoice, totals }: Props) {
   const { customization, seller, buyer } = invoice;
   const primary = customization.primaryColor;
-  const fs = customization.fontSize === 'sm' ? '11px' : customization.fontSize === 'lg' ? '15px' : '13px';
+  const zoom = customization.fontSize === 'sm' ? 0.88 : customization.fontSize === 'lg' ? 1.12 : 1;
   const typeLabel = INVOICE_TYPE_LABELS[invoice.invoiceType];
 
   return (
     <div
       id="invoice-print-root"
-      style={{ fontFamily: 'Vazirmatn, sans-serif', fontSize: fs, direction: 'rtl', background: '#fff', color: '#0f172a', padding: '32px 36px' }}
+      style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', padding: '32px 36px', zoom }}
     >
-      {/* Header — 3-col layout: Right=brand, Center=type, Left=date (minimal style) */}
+      {/* Header — 3-col layout */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', marginBottom: '24px' }}>
         {/* Right: logo + brand name + contact */}
         <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '3px' }}>
@@ -58,7 +58,7 @@ export function MinimalTemplate({ invoice, totals }: Props) {
           </div>
         </div>
 
-        {/* Left: number + date (left-aligned, ltr so block flow goes to physical left) */}
+        {/* Left: number + date */}
         <div style={{ textAlign: 'left', direction: 'ltr' }}>
           <table style={{ fontSize: '12px' }}>
             <tbody>
@@ -139,6 +139,7 @@ export function MinimalTemplate({ invoice, totals }: Props) {
       )}
 
       <SignatureRow invoice={invoice} />
+      <InvoiceFooter invoice={invoice} primary={primary} />
     </div>
   );
 }

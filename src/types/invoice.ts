@@ -41,6 +41,8 @@ export interface InvoiceCustomization {
   showSignature: boolean;
   showStamp: boolean;
   template: InvoiceTemplate;
+  showFooter: boolean;
+  footerText: string;
 }
 
 export interface InvoiceData {

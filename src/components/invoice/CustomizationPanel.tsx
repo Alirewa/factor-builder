@@ -2,8 +2,9 @@
 
 import { useInvoiceStore } from '@/store/invoiceStore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Palette, Layout, Eye, Type } from 'lucide-react';
+import { X, Palette, Layout, Eye, Type, Building2 } from 'lucide-react';
 import { InvoiceTemplate } from '@/types/invoice';
+import toast from 'react-hot-toast';
 
 const COLORS = [
   { hex: '#2563eb', name: 'آبی' },
@@ -24,8 +25,18 @@ const TEMPLATES: { id: InvoiceTemplate; label: string; desc: string }[] = [
 ];
 
 export function CustomizationPanel() {
-  const { isCustomizationOpen, toggleCustomization, invoice, updateCustomization } = useInvoiceStore();
+  const { isCustomizationOpen, toggleCustomization, invoice, updateCustomization, loadBimfaPreset } = useInvoiceStore();
   const c = invoice.customization;
+
+  const handleBimfaPreset = async () => {
+    const t = toast.loading('در حال بارگذاری پریست...');
+    try {
+      await loadBimfaPreset();
+      toast.success('پریست بیم فا بارگذاری شد. لوگو را از بخش اطلاعات فروشنده آپلود کنید.', { id: t, duration: 4000 });
+    } catch {
+      toast.error('خطا در بارگذاری پریست', { id: t });
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -40,7 +51,7 @@ export function CustomizationPanel() {
             className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 no-print"
           />
 
-          {/* Drawer — slides from right on RTL */}
+          {/* Drawer */}
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -61,6 +72,22 @@ export function CustomizationPanel() {
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto p-4 space-y-5 scrollbar-thin">
+
+              {/* BIMFA Preset */}
+              <Section icon={<Building2 className="w-3.5 h-3.5" />} title="پیش‌فرض برند">
+                <button
+                  onClick={handleBimfaPreset}
+                  className="w-full flex items-center gap-3 p-3 rounded-xl border-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors text-right"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-[10px] font-black">BF</span>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-blue-700 dark:text-blue-300">گروه بیم فا</div>
+                    <div className="text-[10px] text-blue-500 dark:text-blue-400 mt-0.5">بارگذاری اطلاعات و فوتر</div>
+                  </div>
+                </button>
+              </Section>
 
               {/* Template */}
               <Section icon={<Layout className="w-3.5 h-3.5" />} title="قالب">
@@ -140,6 +167,7 @@ export function CustomizationPanel() {
                     ['showNotes',     'نمایش توضیحات'],
                     ['showSignature', 'نمایش امضا'],
                     ['showStamp',     'نمایش مهر'],
+                    ['showFooter',    'نمایش فوتر تماس'],
                   ] as const).map(([key, label]) => (
                     <label key={key} className="flex items-center justify-between cursor-pointer py-1.5 rounded-lg px-1 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
                       <span className="text-sm text-gray-600 dark:text-slate-400">{label}</span>
@@ -150,7 +178,22 @@ export function CustomizationPanel() {
                     </label>
                   ))}
                 </div>
+
+                {/* Footer text area — shown when footer toggle is on */}
+                {c.showFooter && (
+                  <div className="mt-3">
+                    <label className="label mb-1.5">متن فوتر</label>
+                    <textarea
+                      value={c.footerText}
+                      onChange={(e) => updateCustomization({ footerText: e.target.value })}
+                      placeholder="آدرس، تلفن، وب‌سایت..."
+                      rows={3}
+                      className="input resize-none text-xs leading-relaxed"
+                    />
+                  </div>
+                )}
               </Section>
+
             </div>
           </motion.div>
         </>
@@ -178,19 +221,11 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className="relative flex-shrink-0 rounded-full transition-colors duration-200 focus:outline-none"
-      style={{
-        width: 40,
-        height: 22,
-        background: checked ? '#3b82f6' : '#d1d5db',
-      }}
+      style={{ width: 40, height: 22, background: checked ? '#3b82f6' : '#d1d5db' }}
     >
       <span
         className="absolute top-0.5 bg-white rounded-full shadow-sm transition-transform duration-200"
-        style={{
-          width: 18,
-          height: 18,
-          transform: checked ? 'translateX(19px)' : 'translateX(2px)',
-        }}
+        style={{ width: 18, height: 18, transform: checked ? 'translateX(19px)' : 'translateX(2px)' }}
       />
     </button>
   );

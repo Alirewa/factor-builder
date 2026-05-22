@@ -1,19 +1,19 @@
 'use client';
 
 import { InvoiceData, InvoiceTotals } from '@/types/invoice';
-import { InvoiceHeaderBlock, PartyBox, ItemsTable, TotalsSummary, SignatureRow } from './shared';
+import { InvoiceHeaderBlock, PartyBox, ItemsTable, TotalsSummary, SignatureRow, InvoiceFooter } from './shared';
 
 interface Props { invoice: InvoiceData; totals: InvoiceTotals; }
 
 export function FormalTemplate({ invoice, totals }: Props) {
   const { customization } = invoice;
   const primary = customization.primaryColor;
-  const fs = customization.fontSize === 'sm' ? '11px' : customization.fontSize === 'lg' ? '15px' : '13px';
+  const zoom = customization.fontSize === 'sm' ? 0.88 : customization.fontSize === 'lg' ? 1.12 : 1;
 
   return (
     <div
       id="invoice-print-root"
-      style={{ fontFamily: 'Vazirmatn, sans-serif', fontSize: fs, direction: 'rtl', background: '#fff', color: '#0f172a' }}
+      style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', zoom }}
     >
       {/* Top accent line */}
       <div style={{ height: '4px', background: primary }} />
@@ -64,6 +64,8 @@ export function FormalTemplate({ invoice, totals }: Props) {
 
       {/* Bottom accent */}
       <div style={{ height: '4px', background: primary, marginTop: '6px' }} />
+
+      <InvoiceFooter invoice={invoice} primary={primary} />
     </div>
   );
 }

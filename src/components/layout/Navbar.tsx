@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {
-  Moon, Sun, Settings, RotateCcw, Download,
+  Moon, Sun, Settings, Download,
   Printer, FolderOpen, Menu, X,
 } from 'lucide-react';
 import { useInvoiceStore } from '@/store/invoiceStore';
@@ -16,7 +16,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ onExportPDF, onPrint, isExporting }: NavbarProps) {
-  const { theme, setTheme, toggleCustomization, toggleResetModal, toggleInvoiceList, savedInvoices } = useInvoiceStore();
+  const { theme, setTheme, toggleCustomization, toggleInvoiceList, savedInvoices } = useInvoiceStore();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const closeDrawer = () => setDrawerOpen(false);
@@ -56,11 +56,6 @@ export function Navbar({ onExportPDF, onPrint, isExporting }: NavbarProps) {
                   {savedInvoices.length}
                 </span>
               )}
-            </button>
-
-            <button onClick={toggleResetModal} className="btn-ghost px-3" title="پاک کردن فرم">
-              <RotateCcw className="w-4 h-4" />
-              <span className="text-xs">پاک کردن</span>
             </button>
 
             <button onClick={toggleCustomization} className="btn-ghost px-3" title="تنظیمات">
@@ -185,12 +180,6 @@ export function Navbar({ onExportPDF, onPrint, isExporting }: NavbarProps) {
                   onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark'); closeDrawer(); }}
                 />
 
-                <DrawerItem
-                  icon={<RotateCcw className="w-5 h-5" />}
-                  label="پاک کردن فرم"
-                  danger
-                  onClick={() => { toggleResetModal(); closeDrawer(); }}
-                />
               </nav>
 
               {/* Drawer footer */}

@@ -228,6 +228,39 @@ input, textarea, select, button {
   }
 }
 
+/* ── react-multi-date-picker overrides ── */
+.rmdp-wrapper {
+  font-family: 'Vazirmatn', sans-serif !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important;
+  border: 1px solid #e5e7eb !important;
+  z-index: 9999 !important;
+}
+.dark .rmdp-wrapper {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+.rmdp-header-values, .rmdp-day, .rmdp-week-day {
+  font-family: 'Vazirmatn', sans-serif !important;
+}
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background: #2563eb !important;
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+}
+.dark .rmdp-day:not(.rmdp-disabled) span:hover {
+  background: #1e3a8a !important;
+  color: #93c5fd !important;
+}
+.rmdp-arrow { border-color: #2563eb !important; }
+.rmdp-arrow-container:hover { background: #dbeafe !important; }
+.rmdp-ep-arrow { display: none !important; }
+.rmdp-input {
+  all: unset;
+}
+
 @page {
   size: A4;
   margin: 0;

@@ -63,33 +63,16 @@ export async function exportInvoiceToPDF(invoiceNumber: string): Promise<void> {
   const { naturalWidth: nw, naturalHeight: nh } = img;
   const imgHeightMM = (nh / nw) * pdfWidth;
 
-  if (imgHeightMM <= pdfHeight + 1) {
-    // ── single page ──
+  // ── Always single A4 page ──
+  // If content fits naturally → place at top, full width
+  // If content is taller than A4 → scale down to fit, center horizontally
+  if (imgHeightMM <= pdfHeight) {
     pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, imgHeightMM);
   } else {
-    // ── multi-page: slice the canvas ──
-    const src = document.createElement('canvas');
-    src.width = nw; src.height = nh;
-    src.getContext('2d')!.drawImage(img, 0, 0);
-
-    const pxPerMM    = nw / pdfWidth;
-    const pageHPx    = pdfHeight * pxPerMM;
-    let   offsetPx   = 0;
-    let   remaining  = nh;
-
-    while (remaining > 0) {
-      if (offsetPx > 0) pdf.addPage();
-      const sliceH   = Math.min(pageHPx, remaining);
-      const sliceHMM = (sliceH / nw) * pdfWidth;
-
-      const pg = document.createElement('canvas');
-      pg.width = nw; pg.height = Math.ceil(sliceH);
-      pg.getContext('2d')!.drawImage(src, 0, offsetPx, nw, sliceH, 0, 0, nw, sliceH);
-
-      pdf.addImage(pg.toDataURL('image/png', 1.0), 'PNG', 0, 0, pdfWidth, sliceHMM);
-      offsetPx  += pageHPx;
-      remaining -= pageHPx;
-    }
+    const scale    = pdfHeight / imgHeightMM;
+    const scaledW  = pdfWidth * scale;
+    const xOffset  = (pdfWidth - scaledW) / 2;
+    pdf.addImage(dataUrl, 'PNG', xOffset, 0, scaledW, pdfHeight);
   }
 
   pdf.save(`فاکتور-${invoiceNumber || 'بدون-شماره'}.pdf`);
@@ -114,7 +97,7 @@ export function printInvoice(): void {
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
   <style>
-    @page { size: A4; margin: 0; }
+    @page { size: A4 portrait; margin: 0; }
     * { box-sizing: border-box; }
     html, body {
       margin: 0; padding: 0;
@@ -126,14 +109,25 @@ export function printInvoice(): void {
     }
     #invoice-print-root {
       width: 794px;
+      transform-origin: top center;
     }
   </style>
 </head>
 <body>
   ${source.outerHTML}
   <script>
-    // Wait for fonts, then print automatically
     document.fonts.ready.then(function () {
+      // Scale to fit A4 height (1122px at 96dpi) if content is taller
+      var el = document.getElementById('invoice-print-root');
+      if (el) {
+        var A4H = 1122;
+        var h = el.scrollHeight;
+        if (h > A4H) {
+          var s = A4H / h;
+          el.style.transform = 'scale(' + s + ')';
+          el.style.marginBottom = ((h * s) - h) + 'px';
+        }
+      }
       window.print();
       window.onafterprint = function () { window.close(); };
     });

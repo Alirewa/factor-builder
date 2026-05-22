@@ -12,6 +12,7 @@ interface SectionCardProps {
   className?: string;
   collapsible?: boolean;
   defaultOpen?: boolean;
+  headerAction?: React.ReactNode;
 }
 
 export function SectionCard({
@@ -21,6 +22,7 @@ export function SectionCard({
   className,
   collapsible = false,
   defaultOpen = true,
+  headerAction,
 }: SectionCardProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -41,15 +43,18 @@ export function SectionCard({
           {icon && <span className="text-blue-600 dark:text-blue-400 flex-shrink-0">{icon}</span>}
           <h2 className="section-title">{title}</h2>
         </div>
-        {collapsible && (
-          <motion.span
-            animate={{ rotate: isOpen ? 0 : -90 }}
-            transition={{ duration: 0.2 }}
-            className="text-gray-400 flex-shrink-0"
-          >
-            <ChevronDown className="w-4 h-4" />
-          </motion.span>
-        )}
+        <div className="flex items-center gap-1">
+          {headerAction}
+          {collapsible && (
+            <motion.span
+              animate={{ rotate: isOpen ? 0 : -90 }}
+              transition={{ duration: 0.2 }}
+              className="text-gray-400 flex-shrink-0"
+            >
+              <ChevronDown className="w-4 h-4" />
+            </motion.span>
+          )}
+        </div>
       </div>
 
       <div className="divider" />
@@ -62,7 +67,7 @@ export function SectionCard({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            style={{ overflow: 'visible' }}   // ← visible so dropdowns escape
+            style={{ overflow: 'visible' }}
           >
             <div className="p-3 sm:p-4">{children}</div>
           </motion.div>

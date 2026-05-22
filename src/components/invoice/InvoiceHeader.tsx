@@ -3,8 +3,9 @@
 import { useInvoiceStore } from '@/store/invoiceStore';
 import { FormField } from '@/components/ui/FormField';
 import { SectionCard } from '@/components/ui/SectionCard';
+import { JalaliDatePicker } from '@/components/ui/JalaliDatePicker';
 import { InvoiceType } from '@/types/invoice';
-import { FileText, ShoppingCart, ClipboardList } from 'lucide-react';
+import { FileText, ShoppingCart, ClipboardList, RotateCcw } from 'lucide-react';
 
 const TYPES: { value: InvoiceType; label: string; icon: React.ReactNode }[] = [
   { value: 'sale',     label: 'فاکتور فروش',   icon: <FileText className="w-3.5 h-3.5" /> },
@@ -13,10 +14,26 @@ const TYPES: { value: InvoiceType; label: string; icon: React.ReactNode }[] = [
 ];
 
 export function InvoiceHeader() {
-  const { invoice, updateInvoice } = useInvoiceStore();
+  const { invoice, updateInvoice, toggleResetModal } = useInvoiceStore();
+
+  const resetButton = (
+    <button
+      type="button"
+      onClick={(e) => { e.stopPropagation(); toggleResetModal(); }}
+      className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+      title="پاک کردن فاکتور"
+    >
+      <RotateCcw className="w-3.5 h-3.5" />
+      <span className="hidden sm:inline">پاک کردن</span>
+    </button>
+  );
 
   return (
-    <SectionCard title="اطلاعات فاکتور" icon={<FileText className="w-4 h-4" />}>
+    <SectionCard
+      title="اطلاعات فاکتور"
+      icon={<FileText className="w-4 h-4" />}
+      headerAction={resetButton}
+    >
       {/* Invoice type selector */}
       <div className="mb-4">
         <label className="label">نوع سند</label>
@@ -52,22 +69,18 @@ export function InvoiceHeader() {
         </FormField>
 
         <FormField label="تاریخ صدور" required>
-          <input
-            className="input"
-            type="date"
+          <JalaliDatePicker
             value={invoice.invoiceDate}
-            onChange={(e) => updateInvoice({ invoiceDate: e.target.value })}
-            dir="ltr"
+            onChange={(iso) => updateInvoice({ invoiceDate: iso })}
+            placeholder="انتخاب تاریخ"
           />
         </FormField>
 
         <FormField label="تاریخ سررسید">
-          <input
-            className="input"
-            type="date"
+          <JalaliDatePicker
             value={invoice.dueDate}
-            onChange={(e) => updateInvoice({ dueDate: e.target.value })}
-            dir="ltr"
+            onChange={(iso) => updateInvoice({ dueDate: iso })}
+            placeholder="اختیاری"
           />
         </FormField>
       </div>

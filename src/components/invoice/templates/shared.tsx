@@ -308,3 +308,24 @@ const tdS: React.CSSProperties = {
   fontSize: '12px',
   fontFamily: 'Vazirmatn, sans-serif',
 };
+
+// ─── Footer contact info (shared) ────────────────────────────────────────────
+export function InvoiceFooter({ invoice, primary }: { invoice: InvoiceData; primary: string }) {
+  if (!invoice.customization.showFooter || !invoice.customization.footerText) return null;
+  return (
+    <div
+      style={{
+        borderTop: `1px solid ${primary}33`,
+        padding: '7px 28px',
+        fontSize: '10px',
+        color: '#64748b',
+        textAlign: 'center',
+        background: `${primary}06`,
+        lineHeight: 1.7,
+        fontFamily: 'Vazirmatn, sans-serif',
+      }}
+    >
+      {invoice.customization.footerText}
+    </div>
+  );
+}

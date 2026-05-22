@@ -25,7 +25,7 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         gap: '12px',
         padding: '16px 24px 14px',
         background: dark ? primary : `${primary}12`,
@@ -72,9 +72,9 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
         </div>
       </div>
 
-      {/* ── Left col: Invoice number + dates — RTL so label comes first ── */}
-      <div style={{ textAlign: 'right', direction: 'rtl' }}>
-        <table style={{ fontSize: '12px', borderCollapse: 'collapse' }}>
+      {/* ── Left col: Invoice number + dates — table RTL so label comes first, div left-aligned ── */}
+      <div style={{ textAlign: 'left' }}>
+        <table style={{ fontSize: '12px', borderCollapse: 'collapse', direction: 'rtl' }}>
           <tbody>
             <tr>
               <td style={{ color: mutedColor, paddingBottom: '4px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>شماره:</td>

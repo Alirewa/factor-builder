@@ -18,7 +18,7 @@ export function MinimalTemplate({ invoice, totals }: Props) {
       style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', padding: '22px 28px', zoom }}
     >
       {/* Header — 3-col layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', marginBottom: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'flex-start', marginBottom: '24px' }}>
         {/* Right: logo + brand name only */}
         <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '3px' }}>
           {customization.logoImage && (
@@ -47,9 +47,9 @@ export function MinimalTemplate({ invoice, totals }: Props) {
           </div>
         </div>
 
-        {/* Left col: number + date — RTL so label comes first */}
-        <div style={{ textAlign: 'right', direction: 'rtl' }}>
-          <table style={{ fontSize: '12px' }}>
+        {/* Left col: number + date — table RTL so label comes first, div left-aligned */}
+        <div style={{ textAlign: 'left' }}>
+          <table style={{ fontSize: '12px', direction: 'rtl' }}>
             <tbody>
               <tr>
                 <td style={{ color: '#94a3b8', paddingBottom: '3px', paddingLeft: '8px', whiteSpace: 'nowrap' }}>شماره:</td>

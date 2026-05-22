@@ -27,12 +27,12 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
         gap: '12px',
-        padding: '22px 28px 18px',
+        padding: '16px 24px 14px',
         background: dark ? primary : `${primary}12`,
         borderBottom: dark ? 'none' : `3px solid ${primary}`,
       }}
     >
-      {/* ── Right: Logo + brand name + seller contact ── */}
+      {/* ── Right: Logo + brand name only ── */}
       <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
         {customization.logoImage && (
           <img
@@ -51,17 +51,6 @@ export function InvoiceHeaderBlock({ invoice, primary, dark = false }: HeaderPro
         >
           {seller.company || seller.name || 'نام شرکت / برند'}
         </div>
-        {seller.company && seller.name && (
-          <div style={{ fontSize: '11px', color: mutedColor }}>{seller.name}</div>
-        )}
-        {seller.phone && (
-          <div style={{ fontSize: '11px', color: mutedColor, direction: 'ltr', textAlign: 'right' }}>
-            {seller.phone}
-          </div>
-        )}
-        {seller.email && (
-          <div style={{ fontSize: '10px', color: mutedColor, direction: 'ltr' }}>{seller.email}</div>
-        )}
       </div>
 
       {/* ── Center: Invoice type label ── */}
@@ -120,7 +109,7 @@ export function PartyBox({ party, label, primary }: { party: InvoiceData['seller
       <div style={{ background: primary, color: '#fff', fontSize: '11px', fontWeight: 700, padding: '5px 12px' }}>
         {label}
       </div>
-      <div style={{ padding: '10px 12px', fontSize: '12px', lineHeight: 1.85 }}>
+      <div style={{ padding: '8px 12px', fontSize: '11.5px', lineHeight: 1.7 }}>
         {hasData ? (
           <>
             <div style={{ fontWeight: 700, fontSize: '13px' }}>{party.company || party.name}</div>
@@ -158,7 +147,7 @@ export function ItemsTable({
               <th
                 key={h}
                 style={{
-                  padding: '9px 11px',
+                  padding: '8px 10px',
                   color: '#ffffff',
                   fontSize: '11px',
                   fontWeight: 700,
@@ -257,8 +246,8 @@ export function SignatureRow({ invoice }: { invoice: InvoiceData }) {
         display: 'flex',
         justifyContent: 'flex-end',
         gap: '40px',
-        marginTop: '28px',
-        paddingTop: '14px',
+        marginTop: '18px',
+        paddingTop: '10px',
         borderTop: '1px dashed #e2e8f0',
       }}
     >
@@ -297,9 +286,10 @@ function TRow({ label, value, color }: { label: string; value: string; color?: s
 }
 
 const tdS: React.CSSProperties = {
-  padding: '9px 11px',
-  fontSize: '12px',
+  padding: '7px 10px',
+  fontSize: '11.5px',
   fontFamily: 'Vazirmatn, sans-serif',
+  lineHeight: 1.4,
 };
 
 // ─── Footer contact info (shared) ────────────────────────────────────────────

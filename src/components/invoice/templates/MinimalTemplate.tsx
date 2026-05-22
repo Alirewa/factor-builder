@@ -15,11 +15,11 @@ export function MinimalTemplate({ invoice, totals }: Props) {
   return (
     <div
       id="invoice-print-root"
-      style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', padding: '32px 36px', zoom }}
+      style={{ fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', background: '#fff', color: '#0f172a', padding: '22px 28px', zoom }}
     >
       {/* Header — 3-col layout */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', marginBottom: '24px' }}>
-        {/* Right: logo + brand name + contact */}
+        {/* Right: logo + brand name only */}
         <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '3px' }}>
           {customization.logoImage && (
             <img src={customization.logoImage} alt="logo" style={{ height: '40px', objectFit: 'contain', marginBottom: '3px' }} />
@@ -27,17 +27,6 @@ export function MinimalTemplate({ invoice, totals }: Props) {
           <div style={{ fontSize: customization.logoImage ? '16px' : '22px', fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>
             {seller.company || seller.name || 'نام برند'}
           </div>
-          {seller.company && seller.name && (
-            <div style={{ fontSize: '11px', color: '#94a3b8' }}>{seller.name}</div>
-          )}
-          {seller.phone && (
-            <div style={{ fontSize: '11px', color: '#94a3b8', direction: 'ltr', textAlign: 'right' }}>
-              {seller.phone}
-            </div>
-          )}
-          {seller.email && (
-            <div style={{ fontSize: '10px', color: '#94a3b8', direction: 'ltr' }}>{seller.email}</div>
-          )}
         </div>
 
         {/* Center: invoice type */}

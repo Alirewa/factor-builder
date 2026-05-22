@@ -21,9 +21,9 @@ export function CorporateTemplate({ invoice, totals }: Props) {
         <InvoiceHeaderBlock invoice={invoice} primary={primary} dark />
       </div>
 
-      <div style={{ padding: '22px 28px' }}>
+      <div style={{ padding: '16px 24px' }}>
         {/* Parties with accent border */}
-        <div style={{ display: 'flex', gap: '20px', marginBottom: '22px' }}>
+        <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
           {[
             { label: 'فروشنده', party: invoice.seller, accent: primary },
             { label: 'خریدار', party: invoice.buyer, accent: '#0f172a' },
@@ -43,7 +43,7 @@ export function CorporateTemplate({ invoice, totals }: Props) {
         </div>
 
         {/* Items */}
-        <div style={{ marginBottom: '22px' }}>
+        <div style={{ marginBottom: '16px' }}>
           <ItemsTable invoice={invoice} primary={primary} alternateRow="#f8fafc" />
         </div>
 

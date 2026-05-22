@@ -88,8 +88,11 @@ function ItemRow({ item, index }: { item: InvoiceItem; index: number }) {
   );
 }
 
+const MAX_ITEMS = 10;
+
 export function InvoiceItems() {
   const { invoice, addItem } = useInvoiceStore();
+  const atLimit = invoice.items.length >= MAX_ITEMS;
 
   return (
     <SectionCard title="اقلام فاکتور" icon={<ShoppingCart className="w-4 h-4" />}>
@@ -110,10 +113,20 @@ export function InvoiceItems() {
       )}
 
       <div className={invoice.items.length > 0 ? 'mt-3 pt-3 border-t border-gray-100 dark:border-slate-700/60' : 'mt-2'}>
-        <button onClick={addItem} className="btn-secondary text-xs w-full sm:w-auto">
-          <Plus className="w-4 h-4" />
-          افزودن ردیف
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={addItem}
+            disabled={atLimit}
+            className="btn-secondary text-xs w-full sm:w-auto disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <Plus className="w-4 h-4" />
+            افزودن ردیف
+          </button>
+          <span className={`text-xs tabular-nums ${atLimit ? 'text-amber-500 dark:text-amber-400 font-medium' : 'text-gray-400 dark:text-slate-500'}`}>
+            {invoice.items.length} / {MAX_ITEMS}
+            {atLimit && ' — حداکثر'}
+          </span>
+        </div>
       </div>
     </SectionCard>
   );

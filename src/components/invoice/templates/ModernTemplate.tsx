@@ -17,15 +17,15 @@ export function ModernTemplate({ invoice, totals }: Props) {
     >
       <InvoiceHeaderBlock invoice={invoice} primary={primary} />
 
-      <div style={{ padding: '20px 28px' }}>
+      <div style={{ padding: '16px 24px' }}>
         {/* Parties */}
-        <div style={{ display: 'flex', gap: '14px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
           <PartyBox party={invoice.seller} label="فروشنده" primary={primary} />
           <PartyBox party={invoice.buyer} label="خریدار" primary={primary} />
         </div>
 
         {/* Items */}
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '16px' }}>
           <ItemsTable invoice={invoice} primary={primary} />
         </div>
 
@@ -33,10 +33,10 @@ export function ModernTemplate({ invoice, totals }: Props) {
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <div
             style={{
-              width: '280px',
+              width: '260px',
               background: '#f8fafc',
               borderRadius: '10px',
-              padding: '14px',
+              padding: '12px',
               border: `1px solid ${primary}20`,
             }}
           >
@@ -48,15 +48,15 @@ export function ModernTemplate({ invoice, totals }: Props) {
         {customization.showNotes && invoice.notes && (
           <div
             style={{
-              marginTop: '18px',
-              padding: '12px',
+              marginTop: '14px',
+              padding: '10px 12px',
               borderRadius: '8px',
               border: `1px solid ${primary}22`,
               background: `${primary}06`,
             }}
           >
-            <div style={{ fontSize: '11px', fontWeight: 700, color: primary, marginBottom: '5px' }}>توضیحات</div>
-            <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.8, margin: 0 }}>{invoice.notes}</p>
+            <div style={{ fontSize: '11px', fontWeight: 700, color: primary, marginBottom: '4px' }}>توضیحات</div>
+            <p style={{ fontSize: '11.5px', color: '#475569', lineHeight: 1.7, margin: 0 }}>{invoice.notes}</p>
           </div>
         )}
 

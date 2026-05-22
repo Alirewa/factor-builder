@@ -20,15 +20,15 @@ export function FormalTemplate({ invoice, totals }: Props) {
 
       <InvoiceHeaderBlock invoice={invoice} primary={primary} />
 
-      <div style={{ padding: '20px 28px' }}>
+      <div style={{ padding: '16px 24px' }}>
         {/* Parties */}
-        <div style={{ display: 'flex', gap: '14px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
           <PartyBox party={invoice.seller} label="فروشنده" primary={primary} />
           <PartyBox party={invoice.buyer} label="خریدار" primary={primary} />
         </div>
 
         {/* Items */}
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '16px' }}>
           <ItemsTable invoice={invoice} primary={primary} />
         </div>
 

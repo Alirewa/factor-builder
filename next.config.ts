@@ -1,13 +1,17 @@
 import type { NextConfig } from 'next';
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const nextConfig: NextConfig = {
-  output: 'export',       // pure static → works on cPanel / DirectAdmin / GitHub Pages / Netlify
-  trailingSlash: true,    // /about → /about/index.html  (required for static hosts)
+  output: 'export',
+  trailingSlash: true,
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  basePath,
+  assetPrefix: basePath,
   images: {
-    unoptimized: true,    // required when output:'export' (no Next.js image server)
+    unoptimized: true,
   },
 };
 

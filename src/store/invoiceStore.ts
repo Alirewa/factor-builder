@@ -4,7 +4,7 @@ import {
   InvoiceData, InvoiceItem, InvoiceTotals, ThemeMode,
   SavedProfile, SavedInvoice, MAX_SAVED_INVOICES, INVOICE_TYPE_LABELS,
 } from '@/types/invoice';
-import { calculateTotals, calculateItemTotal, generateInvoiceNumber, getTodayDate, fileToBase64 } from '@/lib/utils';
+import { calculateTotals, calculateItemTotal, generateInvoiceNumber, getTodayDate } from '@/lib/utils';
 
 const defaultInvoice: InvoiceData = {
   invoiceNumber: '', // generated lazily on client to avoid SSR/client hydration mismatch
@@ -69,7 +69,6 @@ interface InvoiceStore {
   deleteProfile: (id: string) => void;
 
   // Presets
-  loadBimfaPreset: () => Promise<void>;
 
   // Saved invoice actions (max 10)
   saveCurrentInvoice:  () => SavedInvoice | null;
@@ -157,39 +156,6 @@ export const useInvoiceStore = create<InvoiceStore>()(
       resetInvoice: () => {
         const fresh = { ...defaultInvoice, invoiceNumber: generateInvoiceNumber(), invoiceDate: getTodayDate() };
         set({ invoice: fresh, totals: recalc(fresh), isResetModalOpen: false });
-      },
-
-      // ── BIMFA preset ───────────────────────────────────────────────────────
-      loadBimfaPreset: async () => {
-        let logoImage: string | null = null;
-        try {
-          const res = await fetch('/presets/bimfa-logo.png');
-          if (res.ok) {
-            const blob = await res.blob();
-            logoImage = await fileToBase64(blob as File);
-          }
-        } catch { /* logo not found — user can upload manually */ }
-
-        set((s) => ({
-          invoice: {
-            ...s.invoice,
-            seller: {
-              company: 'گروه بیم فا',
-              name: '',
-              phone: '+98 911 145 4518 پورغلام',
-              address: 'کیش، گلدیس، وصال 1، ساختمان اداری ایران، طبقه دوم، واحد 13',
-              email: '',
-              nationalId: '',
-            },
-            customization: {
-              ...s.invoice.customization,
-              primaryColor: '#1d6fe8',
-              showFooter: true,
-              footerText: 'آدرس: کیش، گلدیس، وصال ۱، ساختمان اداری ایران، طبقه دوم، واحد ۱۳  |  تلفن: ۰۹۱۱۱۴۵۴۵۱۸ پورغلام',
-              ...(logoImage ? { logoImage } : {}),
-            },
-          },
-        }));
       },
 
       setTheme: (theme) => set({ theme }),

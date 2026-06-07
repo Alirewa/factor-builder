@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Lock, Eye, EyeOff, ShieldCheck, AlertCircle } from 'lucide-react';
 
-// SHA-256 hash of the valid license key (key is never stored in source)
-const LICENSE_HASH = 'd07d58b4669f60f8eab8004b4fa2bc0dcf61bc5f9a9458e5863ac472057c39cc';
+// SHA-256 hash of the valid license key (plaintext key is never stored in source).
+// Default public key: FACTO-RSAZ0-PUBLI-CDEMO
+// To use your own private key, replace this hash with: sha256(YOUR_KEY_WITHOUT_DASHES).toUpperCase()
+const LICENSE_HASH = 'a4bf1cd2c38bcf136712461e45135b7e1f675b9eb5b30860b36d40790de03928';
 const STORAGE_KEY  = 'fz_license_v1';
 
 async function sha256(text: string): Promise<string> {

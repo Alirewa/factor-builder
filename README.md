@@ -2,7 +2,7 @@
 
 A free, client-side Persian (Farsi) invoice generator. No backend, no sign-up â€” everything runs in your browser.
 
-**[Live Demo](https://alirewa.github.io/factor-builder-Fa/)**
+**[Live Demo](https://alirewa.github.io/factor-builder/)**
 
 ---
 
@@ -40,8 +40,8 @@ A free, client-side Persian (Farsi) invoice generator. No backend, no sign-up â€
 ## Getting Started
 
 ```bash
-git clone https://github.com/Alirewa/factor-builder-Fa.git
-cd factor-builder-Fa
+git clone https://github.com/Alirewa/factor-builder.git
+cd factor-builder
 npm install
 npm run dev
 ```

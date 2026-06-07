@@ -30,7 +30,7 @@ jobs:
 
       - name: Build
         env:
-          NEXT_PUBLIC_BASE_PATH: /factor-builder-Fa
+          NEXT_PUBLIC_BASE_PATH: /factor-builder
         run: npm run build
 
       - name: Upload artifact
